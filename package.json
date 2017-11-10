@@ -1,0 +1,26 @@
+{
+  "name": "wikistack",
+  "version": "1.0.0",
+  "description": "Wikistack Workshop FSA-1710",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -e html,js,css ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hokevins/wikistack.git"
+  },
+  "author": "Allen Johnson, Kevin Ho, Josh Luria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hokevins/wikistack/issues"
+  },
+  "homepage": "https://github.com/hokevins/wikistack#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "nunjucks": "^3.0.1"
+  }
+}
