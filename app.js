@@ -5,16 +5,16 @@ var nunjucks = require('nunjucks');
 
 const app = express();
 
+app.engine('html', nunjucks.render);
+app.set('view engine', 'html');
+nunjucks.configure('views', {noCache: true});
+
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-// app.use('/', routes);
-app.use(morgan('dev'));
-
-nunjucks.configure('views', {noCache: true});
-app.set('view engine', 'html');
-app.engine('html', nunjucks.render);
 
 app.use(express.static(__dirname + '/public'));
+// app.use('/', routes);
 
 app.get('/', function(req, res, next) {
   res.render('index');
