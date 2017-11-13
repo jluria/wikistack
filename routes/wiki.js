@@ -13,9 +13,14 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   var page = Page.build({
     title: req.body.title,
-    content: req.body.content
+    content: req.body.content,
+    urlTitle: urlTitleConverter(req.body.title)
   });
-  console.log(page);
+
+  function urlTitleConverter(str){
+    return str.replace(/\s/g, '_').toLowerCase();
+  }
+  console.log(page.urlTitle);
   page.save()
   .then(function () {
     res.redirect('/');
