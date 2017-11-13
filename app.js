@@ -1,5 +1,6 @@
 var express = require('express');
 var morgan = require('morgan');
+var path = require('path');
 var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 
@@ -13,7 +14,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, '/public')));
 // app.use('/', routes);
 
 app.get('/', function(req, res, next) {
