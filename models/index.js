@@ -9,9 +9,6 @@ const Page = db.define('page', {
   urlTitle: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate: {
-      isURL: true
-    }
   },
   content: {
     type: Sequelize.TEXT,
