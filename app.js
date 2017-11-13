@@ -3,6 +3,7 @@ var morgan = require('morgan');
 var path = require('path');
 var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
+var models = require('./models');
 
 const app = express();
 
@@ -21,6 +22,15 @@ app.get('/', function(req, res, next) {
   res.render('index');
 });
 
-app.listen(1337, function() {
-  console.log('The collective is listening on port 1337:');
+models.Page.sync({force: true}) // Does order matter here?
+.then(function() {
+  return models.User.sync({force: true})
+})
+.then(function() {
+  app.listen(1337, function() {
+    console.log('The collective is listening on port 1337:');
+  });
+})
+.catch(function(error) {
+  console.error(error); // Should it be .catch(console.error); instead of CB?
 });
