@@ -10,22 +10,22 @@ router.get('/', function(req, res, next) {
   res.send('got to GET /wiki/');
 });
 
+router.get('/add', function(req, res, next) {
+  res.render('addPage');
+});
+
 router.post('/', function(req, res, next) {
   var page = Page.build({
     title: req.body.title,
     content: req.body.content
   });
   page.save()
-  .then(function (data) {
-    res.redirect('/wiki/' + data.urlTitle);
+  .then(function (savedPage) {
+    res.redirect(savedPage.route);
   })
   .catch(function (error) {
     console.error(error);
   });
-});
-
-router.get('/add', function(req, res, next) {
-  res.render('addPage');
 });
 
 router.get('/:urlTitle', function(req, res, next) {
@@ -34,11 +34,11 @@ router.get('/:urlTitle', function(req, res, next) {
       urlTitle: req.params.urlTitle
     }
   })
-  .then(function(data) {
+  .then(function(foundPage) {
     res.render('wikipage', {
-      title: data.title,
-      pageContent: data.content,
-      urlTitle: data.urlTitle
+      title: foundPage[0].title,
+      pageContent: foundPage[0].content,
+      urlTitle: foundPage[0].urlTitle
     });
   })
   .catch(function(error) {
