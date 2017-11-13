@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var db = new Sequelize('postgres://localhost:1337/wikistack');
+var db = new Sequelize('postgres://localhost:5432/wikistack');
 
 const Page = db.define('page', {
   title: {  // these are the attribute parameters for our Page model
