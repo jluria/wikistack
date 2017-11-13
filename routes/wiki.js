@@ -35,7 +35,11 @@ router.get('/:urlTitle', function(req, res, next) {
     }
   })
   .then(function(data) {
-    res.json(data);
+    res.render('wikipage', {
+      title: data.title,
+      pageContent: data.content,
+      urlTitle: data.urlTitle
+    });
   })
   .catch(function(error) {
     console.error(error);
