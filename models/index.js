@@ -20,7 +20,16 @@ const Page = db.define('page', {
 }, { // these are the options parameters of Page
   getterMethods: {
     route() {
-      return '/wiki/' + this.urlTitle
+      return '/wiki/' + this.urlTitle;
+    }
+  },
+  hooks: {
+    beforeValidate: function(page, options) {
+      if (page.title) {
+      page.urlTitle = page.title.replace(/\s+/g, '_').replace(/\W/g, '');
+    } else {
+      page.urlTitle = Math.random().toString(36).substring(2, 7);
+    }
     }
   }
 });
