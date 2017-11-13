@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 var db = new Sequelize('postgres://localhost:1337/wikistack');
 
 const Page = db.define('page', {
-  title: {
+  title: {  // these are the attribute parameters for our Page model
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -16,6 +16,12 @@ const Page = db.define('page', {
   },
   status: {
     type: Sequelize.ENUM('open', 'closed')
+  }
+}, { // these are the options parameters of Page
+  getterMethods: {
+    route() {
+      return '/wiki/' + this.urlTitle
+    }
   }
 });
 
