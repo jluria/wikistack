@@ -22,10 +22,7 @@ app.get('/', function(req, res, next) {
   res.render('index');
 });
 
-models.Page.sync({force: true}) // Does order matter here?
-.then(function() {
-  return models.User.sync({force: true})
-})
+models.db.sync({force: true})
 .then(function() {
   app.listen(1337, function() {
     console.log('The collective is listening on port 1337:');
