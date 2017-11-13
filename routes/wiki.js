@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var models = require('../models');
+var Page = models.Page;
+var User = models.User;
 
 module.exports = router;
 
@@ -8,7 +11,18 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  res.send('got to POST /wiki/');
+  var page = Page.build({
+    title: req.body.title,
+    content: req.body.content
+  });
+  console.log(page);
+  page.save()
+  .then(function () {
+    res.redirect('/');
+  })
+  .catch(function (error) {
+    console.error(error);
+  });
 });
 
 router.get('/add', function(req, res, next) {
