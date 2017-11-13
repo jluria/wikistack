@@ -26,7 +26,7 @@ const Page = db.define('page', {
   hooks: {
     beforeValidate: function(page, options) {
       if (page.title) {
-      page.urlTitle = page.title.replace(/\s+/g, '_').replace(/\W/g, '');
+      page.urlTitle = page.title.trim().replace(/\s+/g, '_').replace(/\W/g, '');
     } else {
       page.urlTitle = Math.random().toString(36).substring(2, 7);
     }

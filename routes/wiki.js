@@ -17,7 +17,7 @@ router.post('/', function(req, res, next) {
   });
   page.save()
   .then(function (data) {
-    res.redirect('/' + data.urlTitle);
+    res.redirect('/wiki/' + data.urlTitle);
   })
   .catch(function (error) {
     console.error(error);
@@ -29,5 +29,15 @@ router.get('/add', function(req, res, next) {
 });
 
 router.get('/:urlTitle', function(req, res, next) {
-  //
+  Page.findAll({
+    where: {
+      urlTitle: req.params.urlTitle
+    }
+  })
+  .then(function(data) {
+    res.json(data);
+  })
+  .catch(function(error) {
+    console.error(error);
+  });
 });
