@@ -4,6 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 var models = require('./models');
+var routes = require('./routes/index');
 
 const app = express();
 
@@ -18,9 +19,7 @@ app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, '/public')));
 // app.use('/', routes);
 
-app.get('/', function(req, res, next) {
-  res.render('index');
-});
+app.use('/', routes);
 
 models.db.sync({force: true})
 .then(function() {
